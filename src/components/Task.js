@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Task() {
+
+function Task({onRemoveTask,text,category}) {
+  const[isRemoved, setIsRemoved] = useState(false);
+  
+  const handleRemove = () =>{
+    setIsRemoved(true);
+
+    onRemoveTask({text,category});
+  }
+
+  if(isRemoved) return null;
+
+
   return (
     <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+      <div className="label" category={category}>{category}</div>
+      <div className="text" text={text}> {text} </div>
+      <button className="delete" onClick={handleRemove}>X</button>
     </div>
   );
 }
